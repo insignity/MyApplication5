@@ -1,14 +1,12 @@
 package com.example.myapplication;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -18,62 +16,56 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.Random;
 
-import static com.example.myapplication.DBHelper.COLUMN_ID;
-import static com.example.myapplication.DBHelper.COLUMN_NAME;
-import static com.example.myapplication.DBHelper.COLUMN_YEAR;
-import static com.example.myapplication.DBHelper.TABLE;
-
-public class LessonActivity extends AppCompatActivity {
-    DBHelper dbHelper;
-    Button button;
-
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+public class Lesson1 extends AppCompatActivity {
+    private DBHelper mDBHelper;
+    private SQLiteDatabase mDb;
+    final String TAG = "myLogs";
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lesson);
+        setContentView(R.layout.activity_lesson1);
 
-        dbHelper = new DBHelper(this);
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Button button = findViewById(R.id.button);
 
-        button = findViewById(R.id.button);
-        final String TAG = "myLogs";
-
+        mDBHelper = new DBHelper(this);
+        try {
+            mDBHelper.updateDataBase();
+        } catch (IOException mIOException) {
+            throw new Error("UnableToUpdateDatabase");
+        }
+        try {
+            mDb = mDBHelper.getWritableDatabase();
+        } catch (SQLException mSQLException) {
+            throw mSQLException;
+        }
+        TextView textView = findViewById(R.id.textView);
         int[] cards_id;
         String[] cards_name, cards_src;
         cards_id = new int[100];
-        cards_name = new String[100];
         cards_src = new String[100];
         int image_Resource[] = new int[100];
         int sound_Resource[] = new int[100];
         int i = 0;
+        String str = "";
 
-        String tableNum = TABLE;
-
-        Cursor cursor = db.query(tableNum, null, null, null, null, null, null, null);
-        if (cursor.moveToFirst()) {
-            int idIndex = cursor.getColumnIndex(COLUMN_ID);
-            int nameIndex = cursor.getColumnIndex(COLUMN_NAME);
-            int translateIndex = cursor.getColumnIndex(COLUMN_YEAR);
-            do {
-                cards_id[i] = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
-                cards_name[i] = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
-                cards_src[i] = cursor.getString(cursor.getColumnIndex(COLUMN_YEAR));
-                Log.d(TAG, "ID = " + cursor.getInt(idIndex) +
-                        ", name = " + cursor.getString(nameIndex) +
-                        ", imgsrc = " + cursor.getString(translateIndex));
-                i++;
-            } while (cursor.moveToNext());
+        Cursor cursor = mDb.rawQuery("SELECT task._id, data.name FROM task INNER JOIN data ON task._id = data.id WHERE task.lesson = 1 AND task.activity = 1", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            cards_id[i] = cursor.getInt(0);
+            cards_src[i] = cursor.getString(1);
+            str += cards_src[i];
+            i++;
+            cursor.moveToNext();
         }
         cursor.close();
+        textView.setText(str);
 
-
-
-        final RelativeLayout rl_0 = findViewById(R.id.rl_0);   final TextView textView0 = findViewById(R.id.textView0);
-        final RelativeLayout rl_1 = findViewById(R.id.rl_1);   final TextView textView1 = findViewById(R.id.textView1);
-        final RelativeLayout rl_2 = findViewById(R.id.rl_2);   final TextView textView2 = findViewById(R.id.textView2);
-        final RelativeLayout rl_3 = findViewById(R.id.rl_3);   final TextView textView3 = findViewById(R.id.textView3);
+        final RelativeLayout rl_0 = findViewById(R.id.rl_0);
+        final RelativeLayout rl_1 = findViewById(R.id.rl_1);
+        final RelativeLayout rl_2 = findViewById(R.id.rl_2);
+        final RelativeLayout rl_3 = findViewById(R.id.rl_3);
 
         RelativeLayout.LayoutParams lParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT);
         lParams.setMargins(0, 0, 0, 80);
@@ -89,10 +81,10 @@ public class LessonActivity extends AppCompatActivity {
             sound_Resource[p] = this.getResources().getIdentifier( cards_src[p], "raw", this.getPackageName());
         }
 
-        textView0.setText(cards_name[0]);         imgView_1.setImageResource(image_Resource[0]);
-        textView1.setText(cards_name[1]);         imgView_2.setImageResource(image_Resource[1]);
-        textView2.setText(cards_name[2]);         imgView_3.setImageResource(image_Resource[2]);
-        textView3.setText(cards_name[3]);         imgView_4.setImageResource(image_Resource[3]);
+        imgView_1.setImageResource(image_Resource[0]);
+        imgView_2.setImageResource(image_Resource[1]);
+        imgView_3.setImageResource(image_Resource[2]);
+        imgView_4.setImageResource(image_Resource[3]);
 
         Random random = new Random();
         final int voice = Integer.valueOf(random.nextInt(4));
@@ -180,19 +172,19 @@ public class LessonActivity extends AppCompatActivity {
                             Log.d(TAG, "Pushed button");
                             Log.d(TAG,"Try open Activity2");
                             if (rl_0.isActivated() == true) {
-                                Intent intent = new Intent(LessonActivity.this, Activity2.class);
+                                Intent intent = new Intent(Lesson1.this, Activity2.class);
                                 startActivity(intent);
                             }
                             else if (rl_1.isActivated() == true){
-                                Intent intent = new Intent(LessonActivity.this, Activity2.class);
+                                Intent intent = new Intent(Lesson1.this, Activity2.class);
                                 startActivity(intent);
                             }
                             else if (rl_2.isActivated() == true) {
-                                Intent intent = new Intent(LessonActivity.this, Activity2.class);
+                                Intent intent = new Intent(Lesson1.this, Activity2.class);
                                 startActivity(intent);
                             }
                             else if (rl_3.isActivated() == true) {
-                                Intent intent = new Intent(LessonActivity.this, Activity2.class);
+                                Intent intent = new Intent(Lesson1.this, Activity2.class);
                                 startActivity(intent);
                             }
                             break;
@@ -206,19 +198,17 @@ public class LessonActivity extends AppCompatActivity {
             rl_3.setOnClickListener(onClickListener);
             audiobutton.setOnClickListener(onClickListener);
             button.setOnClickListener(onClickListener);
-        db.delete(TABLE, null,null);
-        dbHelper.close();
         }
         /*public void insertingValues(){
-            dbHelper = new DBHelper(this);
-            SQLiteDatabase db = dbHelper.getWritableDatabase();
+            DataBaseHelper = new DataBaseHelper(this);
+            SQLiteDatabase db = DataBaseHelper.getWritableDatabase();
 
             ContentValues cV = new ContentValues();
 
-            dbHelper.insertData(1,0,  "hue" ,"l1_0");
-            dbHelper.insertData(1,1,  "ghue","l1_1");
-            dbHelper.insertData(1,2,  "ngue","l1_2");
-            dbHelper.insertData(1,3,  "eo"  ,"l1_3");
+            DataBaseHelper.insertData(1,0,  "hue" ,"l1_0");
+            DataBaseHelper.insertData(1,1,  "ghue","l1_1");
+            DataBaseHelper.insertData(1,2,  "ngue","l1_2");
+            DataBaseHelper.insertData(1,3,  "eo"  ,"l1_3");
 
         }
 */

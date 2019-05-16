@@ -8,7 +8,7 @@
     android:background="@color/mycolor"
     android:orientation="vertical"
     android:weightSum="10"
-    tools:context="com.example.myapplication.LessonActivity">
+    tools:context="com.example.myapplication.Lesson1">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -74,21 +74,6 @@
 
                 </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/textView0"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginTop="190dp"
-                    android:layout_marginBottom="0dp"
-
-                    android:gravity="center"
-                    android:includeFontPadding="false"
-                    android:text="TextView"
-                    android:textAllCaps="false"
-                    android:textIsSelectable="false"
-                    android:textSize="18sp" />
-
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
@@ -109,19 +94,6 @@
                     android:id="@+id/rl_1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
-
-                <TextView
-                    android:id="@+id/textView1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginTop="190dp"
-                    android:layout_marginBottom="0dp"
-                    android:gravity="center"
-                    android:includeFontPadding="false"
-                    android:text="TextView"
-                    android:textIsSelectable="false"
-                    android:textSize="18sp" />
 
             </android.support.v7.widget.CardView>
 
@@ -144,19 +116,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginTop="190dp"
-                    android:layout_marginBottom="0dp"
-                    android:gravity="center"
-                    android:includeFontPadding="false"
-                    android:text="TextView"
-                    android:textIsSelectable="false"
-                    android:textSize="18sp" />
-
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
@@ -172,20 +131,6 @@
                     android:id="@+id/rl_3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="190dp"
-                    android:layout_marginBottom="0dp"
-                    android:gravity="center"
-                    android:includeFontPadding="false"
-                    android:text="TextView"
-                    android:textIsSelectable="false"
-                    android:textSize="18sp" />
 
             </android.support.v7.widget.CardView>
 
