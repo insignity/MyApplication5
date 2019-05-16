@@ -41,10 +41,9 @@ public class Lesson1 extends AppCompatActivity {
             throw mSQLException;
         }
         TextView textView = findViewById(R.id.textView);
-        int[] cards_id;
-        String[] cards_name, cards_src;
-        cards_id = new int[100];
-        cards_src = new String[100];
+
+        int[] cards_id = new int[100];
+        String[] cards_src = new String[100];
         int image_Resource[] = new int[100];
         int sound_Resource[] = new int[100];
         int i = 0;
@@ -68,7 +67,7 @@ public class Lesson1 extends AppCompatActivity {
         final RelativeLayout rl_3 = findViewById(R.id.rl_3);
 
         RelativeLayout.LayoutParams lParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT);
-        lParams.setMargins(0, 0, 0, 80);
+        lParams.setMargins(10, 0, 10, 0);
 
         ImageView imgView_1 = new ImageView(this);  rl_0.addView(imgView_1, lParams);
         ImageView imgView_2 = new ImageView(this);  rl_1.addView(imgView_2, lParams);
@@ -87,17 +86,17 @@ public class Lesson1 extends AppCompatActivity {
         imgView_4.setImageResource(image_Resource[3]);
 
         Random random = new Random();
-        final int voice = Integer.valueOf(random.nextInt(4));
-        Log.d(TAG, String.valueOf(voice));
-        final MediaPlayer sound = MediaPlayer.create(this, sound_Resource[voice]);
+        final int randomizeAnswer = Integer.valueOf(random.nextInt(4));
+        Log.d(TAG, String.valueOf(randomizeAnswer));
+        final MediaPlayer sound = MediaPlayer.create(this, sound_Resource[randomizeAnswer]);
         sound.start();
-        Log.d(TAG, String.valueOf(voice));
+        Log.d(TAG, String.valueOf(randomizeAnswer));
         final MediaPlayer sound1 = MediaPlayer.create(this, sound_Resource[0]);
         final MediaPlayer sound2 = MediaPlayer.create(this, sound_Resource[1]);
         final MediaPlayer sound3 = MediaPlayer.create(this, sound_Resource[2]);
         final MediaPlayer sound4 = MediaPlayer.create(this, sound_Resource[3]);
 
-        int rl_answer = this.getResources().getIdentifier( "rl_" + voice, "id", this.getPackageName());
+        int rl_answer = this.getResources().getIdentifier( "rl_" + randomizeAnswer, "id", this.getPackageName());
         final int current_rl = rl_answer;
 
         Log.d(TAG, "Current RL" + rl_answer);
@@ -199,19 +198,6 @@ public class Lesson1 extends AppCompatActivity {
             audiobutton.setOnClickListener(onClickListener);
             button.setOnClickListener(onClickListener);
         }
-        /*public void insertingValues(){
-            DataBaseHelper = new DataBaseHelper(this);
-            SQLiteDatabase db = DataBaseHelper.getWritableDatabase();
-
-            ContentValues cV = new ContentValues();
-
-            DataBaseHelper.insertData(1,0,  "hue" ,"l1_0");
-            DataBaseHelper.insertData(1,1,  "ghue","l1_1");
-            DataBaseHelper.insertData(1,2,  "ngue","l1_2");
-            DataBaseHelper.insertData(1,3,  "eo"  ,"l1_3");
-
-        }
-*/
     }
 
 
