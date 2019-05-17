@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -27,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.imageView123:
                 final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha);
                 v.startAnimation(animAlpha);
-                Intent intent = new Intent(MainActivity.this, Lesson1.class);
+                Intent intent = new Intent(MainActivity.this, Lesson1_1.class);
                 startActivity(intent);
         }
     }

@@ -19,13 +19,13 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.util.Random;
 
-public class Lesson1 extends AppCompatActivity {
+public class Lesson1_1 extends AppCompatActivity {
     private DBHelper mDBHelper;
     private SQLiteDatabase mDb;
     final String TAG = "myLogs";
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lesson1);
+        setContentView(R.layout.activity_lesson1_1);
 
         Button button = findViewById(R.id.button);
 
@@ -40,26 +40,22 @@ public class Lesson1 extends AppCompatActivity {
         } catch (SQLException mSQLException) {
             throw mSQLException;
         }
-        TextView textView = findViewById(R.id.textView);
 
         int[] cards_id = new int[100];
         String[] cards_src = new String[100];
         int image_Resource[] = new int[100];
         int sound_Resource[] = new int[100];
         int i = 0;
-        String str = "";
 
         Cursor cursor = mDb.rawQuery("SELECT task._id, data.name FROM task INNER JOIN data ON task._id = data.id WHERE task.lesson = 1 AND task.activity = 1", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             cards_id[i] = cursor.getInt(0);
             cards_src[i] = cursor.getString(1);
-            str += cards_src[i];
             i++;
             cursor.moveToNext();
         }
         cursor.close();
-        textView.setText(str);
 
         final RelativeLayout rl_0 = findViewById(R.id.rl_0);
         final RelativeLayout rl_1 = findViewById(R.id.rl_1);
@@ -73,7 +69,7 @@ public class Lesson1 extends AppCompatActivity {
         ImageView imgView_2 = new ImageView(this);  rl_1.addView(imgView_2, lParams);
         ImageView imgView_3 = new ImageView(this);  rl_2.addView(imgView_3, lParams);
         ImageView imgView_4 = new ImageView(this);  rl_3.addView(imgView_4, lParams);
-        final ImageView audiobutton = findViewById(R.id.audiobutton);
+        final ImageView audioButton = findViewById(R.id.audiobutton);
 
         for(int p = 0; p < 4; p++){
             image_Resource[p] = this.getResources().getIdentifier( cards_src[p], "drawable", this.getPackageName());
@@ -106,7 +102,6 @@ public class Lesson1 extends AppCompatActivity {
         Log.d(TAG, "Current RL" + R.id.rl_3);
         View.OnClickListener onClickListener = new View.OnClickListener() {
                 @Override
-
                 public void onClick(View view) {
                     int colorActivated = Color.parseColor("#dcf4fe");
                     int colorNotActivated = Color.parseColor("#ffffff");
@@ -169,21 +164,21 @@ public class Lesson1 extends AppCompatActivity {
                             break;
                         case R.id.button:
                             Log.d(TAG, "Pushed button");
-                            Log.d(TAG,"Try open Activity2");
+                            Log.d(TAG,"Try open Lesson1_2");
                             if (rl_0.isActivated() == true) {
-                                Intent intent = new Intent(Lesson1.this, Activity2.class);
+                                Intent intent = new Intent(Lesson1_1.this, Lesson1_2.class);
                                 startActivity(intent);
                             }
                             else if (rl_1.isActivated() == true){
-                                Intent intent = new Intent(Lesson1.this, Activity2.class);
+                                Intent intent = new Intent(Lesson1_1.this, Lesson1_2.class);
                                 startActivity(intent);
                             }
                             else if (rl_2.isActivated() == true) {
-                                Intent intent = new Intent(Lesson1.this, Activity2.class);
+                                Intent intent = new Intent(Lesson1_1.this, Lesson1_2.class);
                                 startActivity(intent);
                             }
                             else if (rl_3.isActivated() == true) {
-                                Intent intent = new Intent(Lesson1.this, Activity2.class);
+                                Intent intent = new Intent(Lesson1_1.this, Lesson1_2.class);
                                 startActivity(intent);
                             }
                             break;
@@ -195,7 +190,7 @@ public class Lesson1 extends AppCompatActivity {
             rl_1.setOnClickListener(onClickListener);
             rl_2.setOnClickListener(onClickListener);
             rl_3.setOnClickListener(onClickListener);
-            audiobutton.setOnClickListener(onClickListener);
+            audioButton.setOnClickListener(onClickListener);
             button.setOnClickListener(onClickListener);
         }
     }

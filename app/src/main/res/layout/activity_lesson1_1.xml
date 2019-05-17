@@ -8,7 +8,7 @@
     android:background="@color/mycolor"
     android:orientation="vertical"
     android:weightSum="10"
-    tools:context="com.example.myapplication.Lesson1">
+    tools:context="com.example.myapplication.Lesson1_1">
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -4,10 +4,6 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notification</string>
-    <string name="radioButton1"></string>
-    <string name="radioButton2"></string>
-    <string name="radioButton3"></string>
     <string name="textView">Какая буква произносится?</string>
-    <string name="radioButton4"></string>
     <string name="cep">Сөп</string>
 </resources>
