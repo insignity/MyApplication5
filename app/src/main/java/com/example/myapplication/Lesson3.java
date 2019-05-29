@@ -6,19 +6,18 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import java.io.IOException;
 
-public class Lesson1_3 extends AppCompatActivity {
+public class Lesson3 extends AppCompatActivity {
     private DBHelper mDBHelper;
     private SQLiteDatabase mDb;
     final String TAG = "myLogs";
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lesson1_3);
+        setContentView(R.layout.activity_lesson3);
 
         final Button buttonOk = findViewById(R.id.buttonOk);
         final Button button0 = findViewById(R.id.button0);   final Button button4 = findViewById(R.id.button4);
@@ -37,6 +36,8 @@ public class Lesson1_3 extends AppCompatActivity {
         } catch (SQLException mSQLException) {
             throw mSQLException;
         }
+        Intent intent = getIntent();
+        final Integer lessonNum = intent.getExtras().getInt("lessonNum");
 
         int[] cards_id = new int[100];
         String[] cards_src = new String[100];
@@ -45,43 +46,49 @@ public class Lesson1_3 extends AppCompatActivity {
         int sound_Resource[] = new int[100];
         int i = 0;
 
-        Cursor cursor = mDb.rawQuery("SELECT task._id, data.name, data.text FROM task INNER JOIN data ON task._id = data.id WHERE task.lesson = 1 AND task.activity = 3", null);
+        Cursor cursor = mDb.rawQuery("SELECT task._id, data.name, data.text FROM task INNER JOIN data ON task._id = data.id WHERE task.lesson = " + lessonNum + " AND task.activity = 3", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             cards_id[i] = cursor.getInt(0);
-            cards_name[i] = cursor.getString(1);
-            cards_src[i] = cursor.getString(2);
+            cards_src[i] = cursor.getString(1);
+            cards_name[i] = cursor.getString(2);
             i++;
             cursor.moveToNext();
         }
         cursor.close();
         for(int p = 0; p < 4; p++){
-            image_Resource[p] = this.getResources().getIdentifier( cards_src[p], "drawable", this.getPackageName());
-            sound_Resource[p] = this.getResources().getIdentifier( cards_src[p], "raw", this.getPackageName());
+           // image_Resource[p] = this.getResources().getIdentifier( cards_src[p], "drawable", this.getPackageName());
+            //sound_Resource[p] = this.getResources().getIdentifier( cards_src[p], "raw", this.getPackageName());
         }
-        button0.setText(cards_name[0]);     button4.setText(cards_src[0]);
+        button0.setText(cards_name[3]);     button4.setText(cards_src[0]);
         button1.setText(cards_name[1]);     button5.setText(cards_src[1]);
-        button2.setText(cards_name[2]);     button6.setText(cards_src[2]);
-        button3.setText(cards_name[3]);     button7.setText(cards_src[3]);
+        button2.setText(cards_name[0]);     button6.setText(cards_src[2]);
+        button3.setText(cards_name[2]);     button7.setText(cards_src[3]);
         final int[] lesson = {0};
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switch (v.getId()){
                     case R.id.button0:
-                        if(button4.isActivated() == true)
+                        if(button7.isActivated() == true)
                         {
-                            buttonOk.setEnabled(true);
-                            button0.setEnabled(false);
-                            button4.setEnabled(false);
+                            if(lesson[0]==4) {
+                                buttonOk.setEnabled(true);
+                            }
                             lesson[0]++;
+                            button0.setEnabled(false);
+                            button7.setEnabled(false);
                         }else
                         reactivateAllButtons();
                         button0.setActivated(true);
                         break;
                     case R.id.button1:
+
                         if(button5.isActivated() == true)
                         {
+                            if(lesson[0]==4) {
+                            buttonOk.setEnabled(true);
+                            }
                             button1.setEnabled(false);
                             button5.setEnabled(false);
                             lesson[0]++;
@@ -90,30 +97,39 @@ public class Lesson1_3 extends AppCompatActivity {
                         button1.setActivated(true);
                         break;
                     case R.id.button2:
-                        if(button6.isActivated() == true)
+                        if(button4.isActivated() == true)
                         {
+                            if(lesson[0]==4) {
+                                buttonOk.setEnabled(true);
+                            }
                             lesson[0]++;
                             button2.setEnabled(false);
-                            button6.setEnabled(false);
+                            button4.setEnabled(false);
                         }else
                             reactivateAllButtons();
                         button2.setActivated(true);
                         break;
                     case R.id.button3:
-                        if(button7.isActivated() == true)
+                        if(button6.isActivated() == true)
                         {
+                            if(lesson[0]==4) {
+                                buttonOk.setEnabled(true);
+                            }
                             lesson[0]++;
                             button3.setEnabled(false);
-                            button7.setEnabled(false);
+                            button6.setEnabled(false);
                         }else
                             reactivateAllButtons();
                         button3.setActivated(true);
                         break;
                     case R.id.button4:
-                        if(button0.isActivated() == true)
+                        if(button2.isActivated() == true)
                         {
+                            if(lesson[0]==4) {
+                                buttonOk.setEnabled(true);
+                            }
                             lesson[0]++;
-                            button0.setEnabled(false);
+                            button2.setEnabled(false);
                             button4.setEnabled(false);
                         }else
                             reactivateAllButtons();
@@ -122,6 +138,9 @@ public class Lesson1_3 extends AppCompatActivity {
                     case R.id.button5:
                         if(button1.isActivated() == true)
                         {
+                            if(lesson[0]==4) {
+                                buttonOk.setEnabled(true);
+                            }
                             lesson[0]++;
                             button1.setEnabled(false);
                             button5.setEnabled(false);
@@ -130,20 +149,26 @@ public class Lesson1_3 extends AppCompatActivity {
                         button5.setActivated(true);
                         break;
                     case R.id.button6:
-                        if(button2.isActivated() == true)
+                        if(button3.isActivated() == true)
                         {
+                            if(lesson[0]==4) {
+                                buttonOk.setEnabled(true);
+                            }
                             lesson[0]++;
-                            button2.setEnabled(false);
+                            button3.setEnabled(false);
                             button6.setEnabled(false);
                         }else
                             reactivateAllButtons();
                         button6.setActivated(true);
                         break;
                     case R.id.button7:
-                        if(button3.isActivated() == true)
+                        if(button0.isActivated() == true)
                         {
+                            if(lesson[0]==4) {
+                                buttonOk.setEnabled(true);
+                            }
                             lesson[0]++;
-                            button3.setEnabled(false);
+                            button0.setEnabled(false);
                             button7.setEnabled(false);
                         }else
                             reactivateAllButtons();
@@ -151,7 +176,8 @@ public class Lesson1_3 extends AppCompatActivity {
                         break;
                     case R.id.buttonOk:
                         if(lesson[0]==4) {
-                            Intent intent = new Intent(Lesson1_3.this, ActivityBlocks.class);
+                            Intent intent = new Intent(Lesson3.this, Lesson4.class);
+                            intent.putExtra("lessonNum", lessonNum);
                             startActivity(intent);
                         }
                         break;

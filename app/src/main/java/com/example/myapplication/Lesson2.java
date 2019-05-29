@@ -10,22 +10,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.io.IOException;
 import java.util.Random;
 
-public class Lesson1_2 extends AppCompatActivity {
+public class Lesson2 extends AppCompatActivity {
     private DBHelper mDBHelper;
     private SQLiteDatabase mDb;
     final String TAG = "myLogs";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lesson1_2);
+        setContentView(R.layout.activity_lesson2);
 
         Button buttonOk = findViewById(R.id.buttonOk);
         ImageView imageView = findViewById(R.id.imageView);
@@ -42,13 +39,15 @@ public class Lesson1_2 extends AppCompatActivity {
         } catch (SQLException mSQLException) {
             throw mSQLException;
         }
+        Intent intent = getIntent();
+        final Integer lessonNum = intent.getExtras().getInt("lessonNum");
         int[] cards_id = new int[100];
         String[] cards_src = new String[100];
         String[] cards_name = new String[100];
         int image_Resource[] = new int[100];
         int sound_Resource[] = new int[100];
         int i = 0;
-        Cursor cursor = mDb.rawQuery("SELECT task._id, data.text, data.name FROM task INNER JOIN data ON task._id = data.id WHERE task.lesson = 1 AND task.activity = 2", null);
+        Cursor cursor = mDb.rawQuery("SELECT task._id, data.text, data.name FROM task INNER JOIN data ON task._id = data.id WHERE task.lesson = " + lessonNum + " AND task.activity = 2", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             cards_id[i] = cursor.getInt(0);
@@ -109,7 +108,8 @@ public class Lesson1_2 extends AppCompatActivity {
                         break;
                     case R.id.buttonOk:
                         if(y[0]==randomizeAnswer) {
-                            Intent intent = new Intent(Lesson1_2.this, Lesson1_3.class);
+                            Intent intent = new Intent(Lesson2.this, Lesson3.class);
+                            intent.putExtra("lessonNum", lessonNum);
                             startActivity(intent);
                             break;
                         }

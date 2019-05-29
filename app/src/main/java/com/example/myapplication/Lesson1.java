@@ -14,18 +14,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import java.io.IOException;
 import java.util.Random;
 
-public class Lesson1_1 extends AppCompatActivity {
+public class Lesson1 extends AppCompatActivity {
     private DBHelper mDBHelper;
     private SQLiteDatabase mDb;
     final String TAG = "myLogs";
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lesson1_1);
+        setContentView(R.layout.activity_lesson1);
 
         Button button = findViewById(R.id.button);
 
@@ -40,14 +39,16 @@ public class Lesson1_1 extends AppCompatActivity {
         } catch (SQLException mSQLException) {
             throw mSQLException;
         }
+        Intent intent = getIntent();
 
+        final Integer lessonNum = intent.getExtras().getInt("lessonNum");
         int[] cards_id = new int[100];
         String[] cards_src = new String[100];
         int image_Resource[] = new int[100];
         int sound_Resource[] = new int[100];
         int i = 0;
 
-        Cursor cursor = mDb.rawQuery("SELECT task._id, data.name FROM task INNER JOIN data ON task._id = data.id WHERE task.lesson = 1 AND task.activity = 1", null);
+        Cursor cursor = mDb.rawQuery("SELECT task._id, data.name FROM task INNER JOIN data ON task._id = data.id WHERE task.lesson = " + lessonNum + " AND task.activity = 1", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             cards_id[i] = cursor.getInt(0);
@@ -94,12 +95,6 @@ public class Lesson1_1 extends AppCompatActivity {
 
         int rl_answer = this.getResources().getIdentifier( "rl_" + randomizeAnswer, "id", this.getPackageName());
         final int current_rl = rl_answer;
-
-        Log.d(TAG, "Current RL" + rl_answer);
-        Log.d(TAG, "Current RL" + R.id.rl_0);
-        Log.d(TAG, "Current RL" + R.id.rl_1);
-        Log.d(TAG, "Current RL" + R.id.rl_2);
-        Log.d(TAG, "Current RL" + R.id.rl_3);
         View.OnClickListener onClickListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -164,21 +159,25 @@ public class Lesson1_1 extends AppCompatActivity {
                             break;
                         case R.id.button:
                             Log.d(TAG, "Pushed button");
-                            Log.d(TAG,"Try open Lesson1_2");
+                            Log.d(TAG,"Try open Lesson2");
                             if (rl_0.isActivated() == true) {
-                                Intent intent = new Intent(Lesson1_1.this, Lesson1_2.class);
+                                Intent intent = new Intent(Lesson1.this, Lesson2.class);
+                                intent.putExtra("lessonNum", lessonNum);
                                 startActivity(intent);
                             }
                             else if (rl_1.isActivated() == true){
-                                Intent intent = new Intent(Lesson1_1.this, Lesson1_2.class);
+                                Intent intent = new Intent(Lesson1.this, Lesson2.class);
+                                intent.putExtra("lessonNum", lessonNum);
                                 startActivity(intent);
                             }
                             else if (rl_2.isActivated() == true) {
-                                Intent intent = new Intent(Lesson1_1.this, Lesson1_2.class);
+                                Intent intent = new Intent(Lesson1.this, Lesson2.class);
+                                intent.putExtra("lessonNum", lessonNum);
                                 startActivity(intent);
                             }
                             else if (rl_3.isActivated() == true) {
-                                Intent intent = new Intent(Lesson1_1.this, Lesson1_2.class);
+                                Intent intent = new Intent(Lesson1.this, Lesson2.class);
+                                intent.putExtra("lessonNum", lessonNum);
                                 startActivity(intent);
                             }
                             break;

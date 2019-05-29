@@ -15,7 +15,7 @@ import java.io.OutputStream;
 class DBHelper extends SQLiteOpenHelper {
     private static String DB_NAME = "sakhalingo.db";
     private static String DB_PATH = "";
-    private static final int DB_VERSION = 4;
+    private static final int DB_VERSION = 12;
 
     private SQLiteDatabase mDataBase;
     private final Context mContext;
@@ -28,9 +28,7 @@ class DBHelper extends SQLiteOpenHelper {
         else
             DB_PATH = "/data/data/" + context.getPackageName() + "/databases/";
         this.mContext = context;
-
         copyDataBase();
-
         this.getReadableDatabase();
     }
 

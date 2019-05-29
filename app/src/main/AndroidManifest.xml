@@ -19,16 +19,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Lesson1_2"
+            android:name=".Lesson2"
             android:label="Lesson"></activity>
         <activity
-            android:name=".Lesson1_1"
+            android:name=".Lesson1"
             android:label="Lesson"></activity>
         <activity
-            android:name=".Lesson1_3"
+            android:name=".Lesson3"
             android:label="Lesson"></activity>
         <activity
-            android:name=".ActivityBlocks"
+            android:name=".Lesson4"
             android:label="ActivityBlocks"/>
     </application>
 
