@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity{
     String TAG = "myLogs";
     ImageView imageView1;
     ImageView imageView2;
+    ImageView imageView3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity{
 
         imageView1 = findViewById(R.id.imageView1);
         imageView2 = findViewById(R.id.imageView2);
+        imageView3 = findViewById(R.id.imageView3);
         final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha);
         final Intent intent = new Intent(MainActivity.this, Lesson1.class);
 
@@ -31,11 +33,14 @@ public class MainActivity extends AppCompatActivity{
                     intent.putExtra("lessonNum", 1);
                 if(v == imageView2)
                     intent.putExtra("lessonNum", 2);
+                if(v == imageView3)
+                    intent.putExtra("lessonNum", 3);
                 startActivity(intent);
             }
         };
         imageView1.setOnClickListener(onClickListener);
         imageView2.setOnClickListener(onClickListener);
+        imageView3.setOnClickListener(onClickListener);
     }
 
 }

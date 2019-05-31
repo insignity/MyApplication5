@@ -15,7 +15,7 @@ import java.io.OutputStream;
 class DBHelper extends SQLiteOpenHelper {
     private static String DB_NAME = "sakhalingo.db";
     private static String DB_PATH = "";
-    private static final int DB_VERSION = 12;
+    private static final int DB_VERSION = 17;
 
     private SQLiteDatabase mDataBase;
     private final Context mContext;

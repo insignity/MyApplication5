@@ -26,7 +26,6 @@ public class Lesson2 extends AppCompatActivity {
 
         Button buttonOk = findViewById(R.id.buttonOk);
         ImageView imageView = findViewById(R.id.imageView);
-        buttonOk.setText(R.string.cep);
 
         mDBHelper = new DBHelper(this);
         try {

@@ -51,13 +51,15 @@
         android:translationY="500dp"/>
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="OK"
-        android:textSize="18sp"
-        android:translationY="600dp" />
+        android:id="@+id/button"
+        android:translationY="570dp"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:background="@drawable/custombutton"
+        android:text="Проверить"
+        android:textColor="@color/mycolor"
+        android:textSize="20dp" />
 
     <TextView
         android:id="@+id/textView3"

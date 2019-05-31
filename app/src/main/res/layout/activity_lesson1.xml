@@ -10,32 +10,27 @@
     android:weightSum="10"
     tools:context="com.example.myapplication.Lesson1">
 
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:layout_weight="2">
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginRight="0dp"
+            android:layout_width="316dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:includeFontPadding="false"
-            android:text="@string/textView"
-            android:textAllCaps="false"
-            android:textSize="34sp"
-            android:typeface="sans" />
-    </RelativeLayout>
+            android:layout_marginTop="30dp"
+            android:text="Выберите то, что тут воспроизводится"
+            android:textSize="29sp" />
+        <ImageView
+            android:id="@+id/audiobutton"
+            android:layout_marginTop="30dp"
+            android:layout_width="81dp"
+            android:layout_height="73dp"
+            app:srcCompat="@drawable/icon_audio" />
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -145,28 +140,17 @@
 
         <Button
             android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="42dp"
-            android:layout_marginEnd="123dp"
-            android:layout_marginRight="123dp"
-            android:text="Check" />
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="Проверить"
+            android:textSize="20dp"
+            android:textColor="@color/mycolor"
+            android:background="@drawable/custombutton"
+            />
 
-        <ImageView
-            android:id="@+id/audiobutton"
-            android:layout_width="81dp"
-            android:layout_height="73dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="105dp"
-            android:layout_marginLeft="105dp"
-            android:layout_marginBottom="37dp"
-            app:srcCompat="@drawable/icon_audio" />
+
     </RelativeLayout>
 
 </LinearLayout>

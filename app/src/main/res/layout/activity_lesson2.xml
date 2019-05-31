@@ -17,10 +17,11 @@
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:gravity="center"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:text="Введите что изображено на рисунке"
+            android:text="Что изображено на рисунке?"
             android:textSize="24sp" />
     </RelativeLayout>
 
@@ -101,10 +102,14 @@
 
         <Button
             android:id="@+id/buttonOk"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Проверить" />
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/custombutton"
+            android:text="Проверить"
+            android:textColor="@color/mycolor"
+            android:textSize="20dp" />
     </RelativeLayout>
 
 </LinearLayout>

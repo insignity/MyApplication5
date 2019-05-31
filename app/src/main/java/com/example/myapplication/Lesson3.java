@@ -40,30 +40,24 @@ public class Lesson3 extends AppCompatActivity {
         final Integer lessonNum = intent.getExtras().getInt("lessonNum");
 
         int[] cards_id = new int[100];
-        String[] cards_src = new String[100];
         String[] cards_name = new String[100];
-        int image_Resource[] = new int[100];
-        int sound_Resource[] = new int[100];
+        String[] cards_pair = new String[100];
         int i = 0;
 
-        Cursor cursor = mDb.rawQuery("SELECT task._id, data.name, data.text FROM task INNER JOIN data ON task._id = data.id WHERE task.lesson = " + lessonNum + " AND task.activity = 3", null);
+        Cursor cursor = mDb.rawQuery("SELECT task._id, data.name, data.pair FROM task INNER JOIN data ON task._id = data.id WHERE task.lesson = " + lessonNum + " AND task.activity = 3", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             cards_id[i] = cursor.getInt(0);
-            cards_src[i] = cursor.getString(1);
-            cards_name[i] = cursor.getString(2);
+            cards_name[i] = cursor.getString(1);
+            cards_pair[i] = cursor.getString(2);
             i++;
             cursor.moveToNext();
         }
         cursor.close();
-        for(int p = 0; p < 4; p++){
-           // image_Resource[p] = this.getResources().getIdentifier( cards_src[p], "drawable", this.getPackageName());
-            //sound_Resource[p] = this.getResources().getIdentifier( cards_src[p], "raw", this.getPackageName());
-        }
-        button0.setText(cards_name[3]);     button4.setText(cards_src[0]);
-        button1.setText(cards_name[1]);     button5.setText(cards_src[1]);
-        button2.setText(cards_name[0]);     button6.setText(cards_src[2]);
-        button3.setText(cards_name[2]);     button7.setText(cards_src[3]);
+        button0.setText(cards_name[3]);     button4.setText(cards_pair[0]);
+        button1.setText(cards_name[1]);     button5.setText(cards_pair[1]);
+        button2.setText(cards_name[0]);     button6.setText(cards_pair[2]);
+        button3.setText(cards_name[2]);     button7.setText(cards_pair[3]);
         final int[] lesson = {0};
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
