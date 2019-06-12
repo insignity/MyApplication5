@@ -34,6 +34,8 @@
         android:orientation="horizontal">
 
         <Button
+            android:background="@drawable/custombutton"
+            android:textColor="@color/white"
             android:id="@+id/button0"
             android:layout_width="90dp"
             android:layout_height="wrap_content"
@@ -41,31 +43,33 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
-            android:text="Button"
             android:textSize="12sp" />
 
         <Button
+            android:background="@drawable/custombutton"
+            android:textColor="@color/white"
             android:id="@+id/button1"
             android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="Button"
             android:textSize="12sp" />
 
         <Button
+            android:background="@drawable/custombutton"
+            android:textColor="@color/white"
             android:id="@+id/button2"
             android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="Button"
             android:textSize="12sp" />
 
         <Button
+            android:background="@drawable/custombutton"
+            android:textColor="@color/white"
             android:id="@+id/button3"
             android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="Button"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -79,6 +83,8 @@
         android:orientation="horizontal">
 
         <Button
+            android:background="@drawable/custombutton"
+            android:textColor="@color/white"
             android:id="@+id/button4"
             android:layout_width="90dp"
             android:layout_height="wrap_content"
@@ -86,32 +92,34 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
-            android:text="Button"
             android:textSize="12sp" />
 
         <Button
+            android:background="@drawable/custombutton"
+            android:textColor="@color/white"
             android:id="@+id/button5"
             android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="Button"
             android:textSize="12sp" />
 
         <Button
+            android:background="@drawable/custombutton"
+            android:textColor="@color/white"
             android:id="@+id/button6"
             android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="Button"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
+            android:background="@drawable/custombutton"
+            android:textColor="@color/white"
             android:id="@+id/button7"
             android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="Button"
             android:textSize="12sp" />
 
 
@@ -130,7 +138,7 @@
             android:layout_height="60dp"
             android:background="@drawable/custombutton"
             android:text="Проверить"
-            android:textColor="@color/mycolor"
+            android:textColor="@color/white"
             android:textSize="20dp" />
     </RelativeLayout>
 

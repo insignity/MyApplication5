@@ -1,10 +1,13 @@
 package com.example.myapplication;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +23,12 @@ public class Lesson4 extends AppCompatActivity {
     private DBHelper mDBHelper;
     private SQLiteDatabase mDb;
     boolean task = false;
+    Dialog dialog;
+    Integer lessonNum;
+    Integer lesson1;
+    Integer lesson2;
+    Integer lesson3;
+    Integer countOfMistakes = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +46,10 @@ public class Lesson4 extends AppCompatActivity {
             throw mSQLException;
         }
         Intent intent = getIntent();
-        final Integer lessonNum = intent.getExtras().getInt("lessonNum");
+        lessonNum = intent.getExtras().getInt("lessonNum");
+        lesson1 = intent.getExtras().getInt("lesson1");
+        lesson2 = intent.getExtras().getInt("lesson2");
+        lesson3 = intent.getExtras().getInt("lesson3");
         int[] id_word = new int[100];
         final String[] text_word = new String[100];
         final String[] text_russian = new String[100];
@@ -70,16 +82,15 @@ public class Lesson4 extends AppCompatActivity {
             word[p].setText(text_word[p]);
         }
         textView.setText(answer);
-        final Intent intent1 = new Intent(Lesson4.this, MainActivity.class);
         for (int i = 0; i < words.positions.length; i++)
             words.setPositions(i, word[i].getX(), word[i].getY());
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+                public void onClick(View v) {
                 if (v == button) {
                     if (task)
-                        intent1.putExtra("lessonNum", lessonNum);
-                        startActivity(intent1);
+                        Congratulation(v);
+                    else Mistake(v);
                 }
                 for (int i = 0; i < words.positions.length; i++)
                     if (v == word[i]) {
@@ -200,5 +211,41 @@ public class Lesson4 extends AppCompatActivity {
             }
             return 4;
         }
+
+    }
+    public void Congratulation(View v){
+        final MediaPlayer right = MediaPlayer.create(this, R.raw.right);
+        right.start();
+        dialog = new Dialog(this);
+        dialog.setContentView(R.layout.custom_layout);
+        dialog.show();
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(Lesson4.this, FinalView.class);
+                intent.putExtra("lessonNum", lessonNum);
+                intent.putExtra("lesson1", lesson1);
+                intent.putExtra("lesson2", lesson2);
+                intent.putExtra("lesson3", lesson3);
+                intent.putExtra("lesson4", countOfMistakes);
+                startActivity(intent);
+            }
+        }, 1000);
+    }
+    public void Mistake(View v){
+        countOfMistakes++;
+        final MediaPlayer right = MediaPlayer.create(this, R.raw.mistake);
+        right.start();
+        dialog = new Dialog(this);
+        dialog.setContentView(R.layout.custom_layout_mistake);
+        dialog.show();
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dialog.cancel();
+            }
+        }, 3000);
     }
 }

@@ -58,7 +58,7 @@
         android:layout_height="60dp"
         android:background="@drawable/custombutton"
         android:text="Проверить"
-        android:textColor="@color/mycolor"
+        android:textColor="@color/white"
         android:textSize="20dp" />
 
     <TextView

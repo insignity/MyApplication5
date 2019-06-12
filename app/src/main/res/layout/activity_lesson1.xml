@@ -5,7 +5,7 @@
     android:id="@+id/linearlayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/mycolor"
+    android:background="@color/white"
     android:orientation="vertical"
     android:weightSum="10"
     tools:context="com.example.myapplication.Lesson1">
@@ -18,18 +18,13 @@
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="316dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginTop="30dp"
-            android:text="Выберите то, что тут воспроизводится"
+            android:layout_marginTop="10dp"
+            android:text="Выберите изображение, которое озвучивается"
             android:textSize="29sp" />
-        <ImageView
-            android:id="@+id/audiobutton"
-            android:layout_marginTop="30dp"
-            android:layout_width="81dp"
-            android:layout_height="73dp"
-            app:srcCompat="@drawable/icon_audio" />
+
     </LinearLayout>
 
     <RelativeLayout
@@ -133,24 +128,32 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="128dp"
         android:layout_weight="2">
 
         <Button
             android:id="@+id/button"
-            android:layout_width="300dp"
+            android:layout_width="250dp"
+            android:layout_marginLeft="50dp"
             android:layout_height="60dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:text="Проверить"
             android:textSize="20dp"
-            android:textColor="@color/mycolor"
+            android:textColor="@color/white"
             android:background="@drawable/custombutton"
             />
+        <ImageView
+            android:layout_marginLeft="10dp"
+            android:id="@+id/audiobutton"
+            android:layout_marginTop="20dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:srcCompat="@drawable/icon_audio" />
 
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>

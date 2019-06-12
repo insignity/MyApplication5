@@ -1,13 +1,18 @@
 package com.example.myapplication;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ToggleButton;
 
 import java.io.IOException;
 
@@ -15,6 +20,11 @@ public class Lesson3 extends AppCompatActivity {
     private DBHelper mDBHelper;
     private SQLiteDatabase mDb;
     final String TAG = "myLogs";
+    Integer lessonNum;
+    Integer lesson1;
+    Integer lesson2;
+    Dialog dialog;
+    Integer countOfMistakes = 0;
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson3);
@@ -37,23 +47,28 @@ public class Lesson3 extends AppCompatActivity {
             throw mSQLException;
         }
         Intent intent = getIntent();
-        final Integer lessonNum = intent.getExtras().getInt("lessonNum");
+        lessonNum = intent.getExtras().getInt("lessonNum");
+        lesson1 = intent.getExtras().getInt("lesson1");
+        lesson2 = intent.getExtras().getInt("lesson2");
 
         int[] cards_id = new int[100];
         String[] cards_name = new String[100];
         String[] cards_pair = new String[100];
         int i = 0;
 
-        Cursor cursor = mDb.rawQuery("SELECT task._id, data.name, data.pair FROM task INNER JOIN data ON task._id = data.id WHERE task.lesson = " + lessonNum + " AND task.activity = 3", null);
+        Cursor cursor = mDb.rawQuery("SELECT data.text, data.pair FROM task INNER JOIN data ON task._id = data.id WHERE task.lesson = " + lessonNum + " AND task.activity = 3", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            cards_id[i] = cursor.getInt(0);
-            cards_name[i] = cursor.getString(1);
-            cards_pair[i] = cursor.getString(2);
+            cards_name[i] = cursor.getString(0);
+            cards_pair[i] = cursor.getString(1);
             i++;
             cursor.moveToNext();
         }
         cursor.close();
+        Log.d(TAG, " "+ cards_name[0] + " " + cards_pair[0]);
+        Log.d(TAG, " "+ cards_name[1] + " " + cards_pair[1]);
+        Log.d(TAG, " "+ cards_name[2] + " " + cards_pair[2]);
+        Log.d(TAG, " "+ cards_name[3] + " " + cards_pair[3]);
         button0.setText(cards_name[3]);     button4.setText(cards_pair[0]);
         button1.setText(cards_name[1]);     button5.setText(cards_pair[1]);
         button2.setText(cards_name[0]);     button6.setText(cards_pair[2]);
@@ -170,10 +185,8 @@ public class Lesson3 extends AppCompatActivity {
                         break;
                     case R.id.buttonOk:
                         if(lesson[0]==4) {
-                            Intent intent = new Intent(Lesson3.this, Lesson4.class);
-                            intent.putExtra("lessonNum", lessonNum);
-                            startActivity(intent);
-                        }
+                            Congratulation(v);
+                        }else Mistake(v);
                         break;
                 }
             }
@@ -206,5 +219,39 @@ public class Lesson3 extends AppCompatActivity {
      button6.setActivated(false);
      button7.setActivated(false);
 
+    }
+    public void Congratulation(View v){
+        final MediaPlayer right = MediaPlayer.create(this, R.raw.right);
+        right.start();
+        dialog = new Dialog(this);
+        dialog.setContentView(R.layout.custom_layout);
+        dialog.show();
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(Lesson3.this, Lesson4.class);
+                intent.putExtra("lessonNum", lessonNum);
+                intent.putExtra("lesson1", lesson1);
+                intent.putExtra("lesson2", lesson2);
+                intent.putExtra("lesson3", countOfMistakes);
+                startActivity(intent);
+            }
+        }, 1000);
+    }
+    public void Mistake(View v){
+        countOfMistakes++;
+        final MediaPlayer right = MediaPlayer.create(this, R.raw.mistake);
+        right.start();
+        dialog = new Dialog(this);
+        dialog.setContentView(R.layout.custom_layout_mistake);
+        dialog.show();
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dialog.cancel();
+            }
+        }, 3000);
     }
 }
